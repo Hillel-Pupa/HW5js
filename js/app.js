@@ -1,13 +1,20 @@
-const priceToGetDiscount = 15000;
-const discountValue = 5;
-const discountValueToCalculate = 1 - discountValue / 100;
+import {
+  showProducts,
+  showPrice,
+  getNumber,
+  priceCalculation,
+  selectCategory,
+} from "./functions.js";
+import { products } from "./products.js";
 
-showProducts();
+const selectedCategory = selectCategory();
+console.log(selectedCategory);
+showProducts(selectedCategory);
 const productNumber = getNumber(
-  products.length,
+  products[selectedCategory].length,
   "Please enter the product number"
 );
-const selectedProduct = products[productNumber - 1];
+const selectedProduct = products[selectedCategory][productNumber - 1];
 const productAmount = getNumber(
   selectedProduct.count,
   "Please enter the product amount"
