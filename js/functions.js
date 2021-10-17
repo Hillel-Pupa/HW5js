@@ -1,28 +1,16 @@
-import { products } from "./products.js";
+import { products, productCategories } from "./products.js";
+
 const priceToGetDiscount = 15000;
 const discountValue = 5;
 const discountValueToCalculate = 1 - discountValue / 100;
 
-let productCategories = Object.keys(products);
-export function selectCategory() {
-  console.log("List ", products);
-  let categoryNumber = parseInt(
-    prompt(
-      "Chose category from 1 to " +
-        productCategories.length +
-        "\n" +
-        productCategories
-    )
-  );
-  let categoryName = productCategories[categoryNumber - 1];
-  return categoryName;
-}
-
 export function showProducts(categoryName) {
   const productsList = products[categoryName];
-  console.log("List of products:");
+  document.body.append("List of products:");
+  document.body.append(document.createElement("br"));
   for (let i = 0; i < productsList.length; i++) {
-    console.log("Product #" + (i + 1) + ": " + productsList[i].name);
+    document.body.append("Product #" + (i + 1) + ": " + productsList[i].name);
+    document.body.append(document.createElement("br"));
   }
 }
 

@@ -3,18 +3,28 @@ import {
   showPrice,
   getNumber,
   priceCalculation,
-  selectCategory,
 } from "./functions.js";
-import { products } from "./products.js";
+import { products, productCategories } from "./products.js";
 
-const selectedCategory = selectCategory();
-console.log(selectedCategory);
-showProducts(selectedCategory);
-const productNumber = getNumber(
-  products[selectedCategory].length,
-  "Please enter the product number"
+const selectedCategoryIndex = getNumber(
+  productCategories.length,
+  `please select category: \n${productCategories}`
 );
-const selectedProduct = products[selectedCategory][productNumber - 1];
+let categoryName = productCategories[selectedCategoryIndex - 1];
+document.body.append("List of categories: " + productCategories);
+document.body.append(document.createElement("br"));
+document.body.append("Your chosen category is: " + categoryName);
+document.body.append(document.createElement("br"));
+showProducts(categoryName);
+const productNumber = getNumber(
+  products[categoryName].length,
+  `Please enter the product number: \n${products[categoryName].map(function (
+    item
+  ) {
+    return item.name;
+  })}`
+);
+const selectedProduct = products[categoryName][productNumber - 1];
 const productAmount = getNumber(
   selectedProduct.count,
   "Please enter the product amount"
