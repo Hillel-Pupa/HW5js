@@ -1,7 +1,8 @@
+"use strict";
+import { Item } from "../functions.js";
+
 export const guns = [
-  {
-    name: "Shotgun",
-    count: 100,
-    price: 500,
-  },
+  new Item("Shotgun", 100, 500),
+  new Item("Pistol", 150, 500),
+  new Item("UZI", 120, 500),
 ];

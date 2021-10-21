@@ -1,3 +1,4 @@
+"use strict";
 import { accesories } from "./categories/accesories.js";
 import { guns } from "./categories/guns.js";
 import { phones } from "./categories/phones.js";

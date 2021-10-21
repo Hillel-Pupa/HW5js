@@ -1,7 +1,8 @@
+"use strict";
+import { Item } from "../functions.js";
+
 export const accesories = [
-  {
-    name: "Samsung Buds",
-    count: 10,
-    price: 300,
-  },
+  new Item("Samsung Buds", 10, 300),
+  new Item("Airpods", 20, 320),
+  new Item("Airpods Pro", 15, 500),
 ];

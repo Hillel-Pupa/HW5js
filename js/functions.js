@@ -1,8 +1,16 @@
+"use strict";
 import { products, productCategories } from "./products.js";
 
 const priceToGetDiscount = 15000;
 const discountValue = 5;
 const discountValueToCalculate = 1 - discountValue / 100;
+
+export function Item(name, count, price) {
+  this.name = name;
+  this.count = count;
+  this.price = price;
+}
+function name(params) {}
 
 export function showProducts(categoryName) {
   const productsList = products[categoryName];
@@ -23,22 +31,41 @@ export function getNumber(limit, description) {
   return value;
 }
 
-export function priceCalculation(amount, price) {
+export function priceCalculation(item, categoryName, amount) {
   const priceObj = {
-    totalPrice: amount * price,
+    item: item,
+    categoryName: categoryName,
+    amount: amount,
+    totalPrice: amount * item.price,
   };
-  if (priceObj.totalPrice > priceToGetDiscount) {
-    priceObj.priceWithDiscount = priceObj.totalPrice * discountValueToCalculate;
-  }
+
   return priceObj;
 }
 
-export function showPrice(obj) {
-  document.body.append("The price of your order is: $" + obj.totalPrice);
+export function showOrder(shoppingCart) {
+  let orderTotal = 0;
+  document.body.append("---------------");
   document.body.append(document.createElement("br"));
-  if (obj.priceWithDiscount) {
+
+  for (let index = 0; index < shoppingCart.length; index++) {
+    const priceObj = shoppingCart[index];
+    orderTotal += priceObj.totalPrice;
+    document.body.append(
+      `Category is: ${priceObj.categoryName} - ${priceObj.item.name}, 
+      amount: ${priceObj.amount}, $${priceObj.totalPrice} `
+    );
+    document.body.append(document.createElement("br"));
+  }
+  let priceWithDiscount = 0;
+  if (orderTotal > priceToGetDiscount) {
+    priceWithDiscount = orderTotal * discountValueToCalculate;
+  }
+  document.body.append("Your order total is $" + orderTotal);
+  document.body.append(document.createElement("br"));
+  if (priceWithDiscount) {
     document.body.append("\nYou will get the discount " + discountValue + "%");
     document.body.append(document.createElement("br"));
-    document.body.append("\nThe final price is: $" + obj.priceWithDiscount);
+    document.body.append("\nThe final price is: $" + priceWithDiscount);
+    document.body.append(document.createElement("br"));
   }
 }
